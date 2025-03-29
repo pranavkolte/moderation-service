@@ -1,0 +1,43 @@
+services:
+  moderation_postgres:
+    image: postgres:17.2-alpine
+    container_name: moderation_postgres
+    environment:
+      POSTGRES_USER: your_user
+      POSTGRES_PASSWORD: your_password
+      POSTGRES_DB: moderation_db
+    volumes:
+      - moderation_postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  moderation_redis:
+    image: redis:latest
+    container_name: moderation_redis
+    restart: always
+    command: ["redis-server", "--requirepass", "your_secure_password"]
+    ports:
+      - "6379:6379"
+    volumes:
+      - moderation_redis_data:/data
+
+  moderation_rabbitmq:
+    image: rabbitmq:3-management
+    container_name: moderation_rabbitmq
+    restart: always
+    environment:
+      - RABBITMQ_DEFAULT_USER=user
+      - RABBITMQ_DEFAULT_PASS=your_secure_password
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+
+volumes:
+  moderation_postgres_data:
+    driver: local
+  moderation_redis_data:
+    driver: local
+  rabbitmq_data:
+    driver: local
