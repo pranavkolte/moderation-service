@@ -32,6 +32,7 @@ api_versions = {
     "v1": [
         ("user.auth_urls", "auth/"),
         ("user.user_urls", "user/"),
+        ("post.urls", "post/"),
     ]
 }
 
