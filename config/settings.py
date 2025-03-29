@@ -147,6 +147,12 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+AUTH_USER_MODEL = "user.User"
+
+AUTHENTICATION_BACKENDS = [
+    "user.backends.CustomUserBackend",
+    "django.contrib.auth.backends.ModelBackend",  # Default
+]
 
 
 SIMPLE_JWT = {
@@ -161,4 +167,16 @@ SIMPLE_JWT = {
     "ALGORITHM": os.getenv("ALGORITHM", "HS256"),
     "SIGNING_KEY": os.getenv("JWT_SECRET_KEY"),
     "VERIFYING_KEY": os.getenv("JWT_SECRET_KEY"), 
+}
+
+REST_FRAMEWORK = {
+    "DEFAULT_RENDERER_CLASSES": [
+        "rest_framework.renderers.JSONRenderer",
+    ],
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.IsAuthenticated",
+    ],
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework_simplejwt.authentication.JWTAuthentication"
+    ],
 }

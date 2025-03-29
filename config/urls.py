@@ -15,8 +15,31 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+from django.http import JsonResponse
+from rest_framework import status
+
+
+def healthcheck(request):
+    return JsonResponse(
+        data={"message": "Moderation API is up and running!"},
+        content_type="application/json",
+        status=status.HTTP_200_OK,
+    )
+
+api_versions = {
+    "v1": [
+        ("user.auth_urls", "auth/"),
+    ]
+}
+
+
 
 urlpatterns = [
+    path('', healthcheck, name='healthcheck'),
     path('admin/', admin.site.urls),
 ]
+
+for version, routes in api_versions.items():
+    for app_url, base_path in routes:
+        urlpatterns.append(path(f"api/{version}/{base_path}", include(app_url)))
