@@ -31,7 +31,7 @@ SECRET_KEY = 'django-insecure-8senva=7$6y(5%mwu-1)#)=ajy5a4r+6)$b1@ic&!#mxbpw7^$
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+SITE_URL = os.getenv("SITE_URL", "http://localhost:8000")
 
 # Application definition
 
@@ -142,6 +142,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
@@ -180,3 +182,5 @@ REST_FRAMEWORK = {
         "rest_framework_simplejwt.authentication.JWTAuthentication"
     ],
 }
+
+API_VERSION = "1.0.0"

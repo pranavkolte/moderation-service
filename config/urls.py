@@ -18,7 +18,8 @@ from django.contrib import admin
 from django.urls import path, include
 from django.http import JsonResponse
 from rest_framework import status
-
+from django.conf import settings
+from django.conf.urls.static import static
 
 def healthcheck(request):
     return JsonResponse(
@@ -30,6 +31,7 @@ def healthcheck(request):
 api_versions = {
     "v1": [
         ("user.auth_urls", "auth/"),
+        ("user.user_urls", "user/"),
     ]
 }
 
@@ -43,3 +45,6 @@ urlpatterns = [
 for version, routes in api_versions.items():
     for app_url, base_path in routes:
         urlpatterns.append(path(f"api/{version}/{base_path}", include(app_url)))
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -38,3 +38,23 @@ class CustomTokenRefreshSerializer(TokenRefreshSerializer):
         data["message"] = "Token refreshed successfully"
         return data
     
+from django.conf import settings
+
+class UserProfileSerializer(serializers.ModelSerializer):
+    profile_picture_url = serializers.SerializerMethodField()
+
+    class Meta:
+        model = User
+        fields = ['user_id', 'username', 'email', 'name', 'bio', 'profile_picture', 'profile_picture_url', 'date_of_birth', 'post_count']
+        read_only_fields = ['user_id', 'created_at', 'updated_at', 'post_count']
+        extra_kwargs = {
+            'profile_picture': {'write_only': True, 'required': False},
+        }
+
+    def get_profile_picture_url(self, obj):
+        if obj.profile_picture:
+            request = self.context.get('request')
+            if request is not None:
+                return request.build_absolute_uri(obj.profile_picture.url)
+            return f"{settings.SITE_URL}{obj.profile_picture.url}"
+        return None
