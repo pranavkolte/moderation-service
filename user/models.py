@@ -49,3 +49,22 @@ class User(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         return self.username
     
+class UserViolation(models.Model):
+    violation_id = models.UUIDField(
+        primary_key=True,
+        editable=False,
+        default=uuid.uuid4
+    )
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='violations',
+        db_index=True
+    )
+    violation_count = models.PositiveIntegerField(default=0)
+    last_violation_at = models.DateTimeField(auto_now=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = 'user_violation'
+        

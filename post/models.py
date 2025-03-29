@@ -22,8 +22,11 @@ class Post(models.Model):
         blank=True,
         null=True
     )
+    
+    is_flagged = models.BooleanField(default=False)
+    flagged_at = models.DateTimeField(null=True, blank=True)
+    
     created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
         db_table = 'post'
@@ -87,6 +90,10 @@ class Comment(models.Model):
         db_index=True
     )
     content = models.TextField()
+    
+    is_flagged = models.BooleanField(default=False)
+    flagged_at = models.DateTimeField(null=True, blank=True)
+    
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:

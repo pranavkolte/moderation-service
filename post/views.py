@@ -5,7 +5,7 @@ from django.shortcuts import get_object_or_404
 from core.response import APIResponse
 from .models import Post, Likes, Comment
 from .serializers import PostSerializer, CommentSerializer, LikeSerializer
-
+from .tasks import report_comment
 
 class PostView(APIView):
     """Handles post creation, retrieval, update, and deletion"""
@@ -185,4 +185,23 @@ class LikeView(APIView):
         like.delete()
         cache.delete(f"post_{post_id}")
         return APIResponse.success(message="Like removed successfully")
+
+class CommentReportView(APIView):
+    def post(self, request, post_id, comment_id):
+        """Report a comment for moderation"""
+        post = get_object_or_404(Post, post_id=post_id)
+        comment = get_object_or_404(Comment, comment_id=comment_id, post_id=post)
+        
+        if comment.user_id == request.user:
+            return APIResponse.error(
+                message="You cannot report your own comment",
+                status_code=status.HTTP_400_BAD_REQUEST
+            )
+            
+        report_comment.delay(comment.comment_id, post.post_id, request.user.user_id)
+
+        return APIResponse.success(
+            message="Comment has been reported and will be reviewed",
+            status_code=status.HTTP_202_ACCEPTED
+        )
     
