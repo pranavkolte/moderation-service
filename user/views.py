@@ -40,10 +40,19 @@ class CustomTokenRefreshView(TokenRefreshView):
 class UserProfileView(APIView):
     def get(self, request, user_id=None):
         if user_id:
+            cache_key = f"user_profile_{user_id}"
             try:
-                user = User.objects.get(user_id=user_id)
-            except User.DoesNotExist:
-                return APIResponse.not_found(message="User not found")
+                user_pofile_data = cache.get(cache_key)
+                if user_pofile_data:
+                    cache.set(cache_key, user_pofile_data)
+                    return APIResponse.success(
+                        message="User profile retrieved successfully",
+                        data=user_pofile_data,
+                        status_code=status.HTTP_200_OK,
+                    )
+            except Exception as e:
+                pass 
+            user = User.objects.get(user_id=user_id)
         else:
             user = request.user
             if not user:
@@ -88,7 +97,6 @@ class UserProfileView(APIView):
                 cache_key = f"user_profile_{user.user_id}"
                 cache.delete(cache_key)  # Delete old cache
                 user_profile_data = UserProfileSerializer(updated_user).data
-                cache.set(cache_key, user_profile_data)
                 
                 return APIResponse.success(
                     message="User profile updated successfully",
