@@ -1,0 +1,48 @@
+name: Container Health Check
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  health-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Create .env file
+        run: |
+          cp .env.sample .env
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Start containers
+        run: |
+          docker-compose up -d
+          sleep 30  # Give containers time to start up
+
+      - name: Check if web service is running
+        run: |
+          if ! curl -s http://localhost:8000 > /dev/null; then
+            echo "Web service is not responding!"
+            docker-compose logs web
+            exit 1
+          fi
+          echo "Web service is running successfully"
+
+      - name: Get container status
+        if: failure()
+        run: |
+          docker ps -a
+          docker-compose logs
+
+      - name: Stop containers
+        if: always()
+        run: docker-compose down -v
+        
