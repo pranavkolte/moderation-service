@@ -1,43 +1,84 @@
 services:
-  moderation_postgres:
+  web:
+    build: .
+    container_name: moderation_web
+    volumes:
+      - .:/app
+      - static_volume:/app/static
+      - media_volume:/app/media
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    depends_on:
+      - db
+      - redis
+      - rabbitmq
+    networks:
+      - moderation_network
+
+  celery_worker:
+    build:
+      context: .
+      dockerfile: Dockerfile.celery
+    container_name: moderation_celery
+    volumes:
+      - .:/app
+    env_file:
+      - .env
+    depends_on:
+      - web
+      - rabbitmq
+      - redis
+    networks:
+      - moderation_network
+
+  db:
     image: postgres:17.2-alpine
     container_name: moderation_postgres
-    environment:
-      POSTGRES_USER: your_user
-      POSTGRES_PASSWORD: your_password
-      POSTGRES_DB: moderation_db
     volumes:
-      - moderation_postgres_data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
+    environment:
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+    networks:
+      - moderation_network
 
-  moderation_redis:
+  redis:
     image: redis:latest
     container_name: moderation_redis
-    restart: always
-    command: ["redis-server", "--requirepass", "your_secure_password"]
+    command: redis-server --requirepass ${REDIS_PASSWORD}
     ports:
       - "6379:6379"
     volumes:
-      - moderation_redis_data:/data
+      - redis_data:/data
+    networks:
+      - moderation_network
 
-  moderation_rabbitmq:
+  rabbitmq:
     image: rabbitmq:3-management
     container_name: moderation_rabbitmq
-    restart: always
     environment:
-      - RABBITMQ_DEFAULT_USER=user
-      - RABBITMQ_DEFAULT_PASS=your_secure_password
+      - RABBITMQ_DEFAULT_USER=${RABBITMQ_USER}
+      - RABBITMQ_DEFAULT_PASS=${RABBITMQ_PASSWORD}
     ports:
       - "5672:5672"
       - "15672:15672"
     volumes:
       - rabbitmq_data:/var/lib/rabbitmq
+    networks:
+      - moderation_network
+
+networks:
+  moderation_network:
+    driver: bridge
 
 volumes:
-  moderation_postgres_data:
-    driver: local
-  moderation_redis_data:
-    driver: local
+  postgres_data:
+  redis_data:
   rabbitmq_data:
-    driver: local
+  static_volume:
+  media_volume:

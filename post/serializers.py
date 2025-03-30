@@ -57,12 +57,10 @@ class PostSerializer(serializers.ModelSerializer):
             'comments_count',
             'comments',
             'created_at',
-            'updated_at'
         ]
         read_only_fields = [
             'post_id',
             'created_at',
-            'updated_at'
         ]
 
     def get_likes_count(self, obj) -> int:
