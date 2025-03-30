@@ -1,0 +1,721 @@
+{
+	"info": {
+		"_postman_id": "d1a32cd9-6166-411a-8dad-1d57d852f5de",
+		"name": "Moderation",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "36565132"
+	},
+	"item": [
+		{
+			"name": "api",
+			"item": [
+				{
+					"name": "v1",
+					"item": [
+						{
+							"name": "auth",
+							"item": [
+								{
+									"name": "signup",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"name\": \"Test User 1\",\r\n    \"username\": \"test.user1\",\r\n    \"email\": \"{{USER2_EMAIL}}\",\r\n    \"password\": \"{{USER2_PASSWORD}}\",\r\n    \"date_of_birth\": \"2025-12-01\"\r\n\r\n\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{HOST}}/api/{{API_VERSION}}/auth/signup/",
+											"host": [
+												"{{HOST}}"
+											],
+											"path": [
+												"api",
+												"{{API_VERSION}}",
+												"auth",
+												"signup",
+												""
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "user -1",
+											"originalRequest": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"name\": \"Test User 1\",\r\n    \"username\": \"test.user1\",\r\n    \"email\": \"{{USER1_EMAIL}}\",\r\n    \"password\": \"{{USER1_PASSWORD}}\",\r\n    \"date_of_birth\": \"2025-12-01\"\r\n\r\n\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{HOST}}/api/{{API_VERSION}}/auth/signup/",
+													"host": [
+														"{{HOST}}"
+													],
+													"path": [
+														"api",
+														"{{API_VERSION}}",
+														"auth",
+														"signup",
+														""
+													]
+												}
+											},
+											"_postman_previewlanguage": null,
+											"header": null,
+											"cookie": [],
+											"body": null
+										},
+										{
+											"name": "user - 2",
+											"originalRequest": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"name\": \"Test User 2\",\r\n    \"username\": \"test.user2\",\r\n    \"email\": \"{{USER2_EMAIL}}\",\r\n    \"password\": \"{{USER2_PASSWORD}}\",\r\n    \"date_of_birth\": \"2025-12-01\"\r\n\r\n\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{HOST}}/api/{{API_VERSION}}/auth/signup/",
+													"host": [
+														"{{HOST}}"
+													],
+													"path": [
+														"api",
+														"{{API_VERSION}}",
+														"auth",
+														"signup",
+														""
+													]
+												}
+											},
+											"_postman_previewlanguage": null,
+											"header": null,
+											"cookie": [],
+											"body": null
+										}
+									]
+								},
+								{
+									"name": "signin",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"email\": \"{{USER2_EMAIL}}\",\r\n    \"password\": \"{{USER2_PASSWORD}}\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{HOST}}/api/{{API_VERSION}}/auth/signin/",
+											"host": [
+												"{{HOST}}"
+											],
+											"path": [
+												"api",
+												"{{API_VERSION}}",
+												"auth",
+												"signin",
+												""
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "user - 1",
+											"originalRequest": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"email\": \"{{USER1_EMAIL}}\",\r\n    \"password\": \"{{USER1_PASSWORD}}\"\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{HOST}}/api/{{API_VERSION}}/auth/signin/",
+													"host": [
+														"{{HOST}}"
+													],
+													"path": [
+														"api",
+														"{{API_VERSION}}",
+														"auth",
+														"signin",
+														""
+													]
+												}
+											},
+											"_postman_previewlanguage": null,
+											"header": null,
+											"cookie": [],
+											"body": null
+										},
+										{
+											"name": "user - 2",
+											"originalRequest": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"email\": \"{{USER2_EMAIL}}\",\r\n    \"password\": \"{{USER2_PASSWORD}}\"\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{HOST}}/api/{{API_VERSION}}/auth/signin/",
+													"host": [
+														"{{HOST}}"
+													],
+													"path": [
+														"api",
+														"{{API_VERSION}}",
+														"auth",
+														"signin",
+														""
+													]
+												}
+											},
+											"_postman_previewlanguage": null,
+											"header": null,
+											"cookie": [],
+											"body": null
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "user",
+							"item": [
+								{
+									"name": "/",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{USER1_ACCESS_TOKEN}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{HOST}}/api/{{API_VERSION}}/user/",
+											"host": [
+												"{{HOST}}"
+											],
+											"path": [
+												"api",
+												"{{API_VERSION}}",
+												"user",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "/<user_id>/",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{USER1_ACCESS_TOKEN}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{HOST}}/api/{{API_VERSION}}/user/cc612d39-1efc-4ac3-b74e-b12d30af5841/",
+											"host": [
+												"{{HOST}}"
+											],
+											"path": [
+												"api",
+												"{{API_VERSION}}",
+												"user",
+												"cc612d39-1efc-4ac3-b74e-b12d30af5841",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "/",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{USER1_ACCESS_TOKEN}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "profile_picture",
+													"type": "file",
+													"src": "/C:/Users/Prana/Downloads/Screenshot_2025-01-18-11-20-15-285_com.orion.notein.global.jpg",
+													"disabled": true
+												},
+												{
+													"key": "bio",
+													"value": "this is my new bio  bibo",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{HOST}}/api/{{API_VERSION}}/user/",
+											"host": [
+												"{{HOST}}"
+											],
+											"path": [
+												"api",
+												"{{API_VERSION}}",
+												"user",
+												""
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "post",
+							"item": [
+								{
+									"name": "comment",
+									"item": [
+										{
+											"name": "/",
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{USER1_ACCESS_TOKEN}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"content\": \"you are black nigga\"\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{HOST}}/api/{{API_VERSION}}/post/{{POST_ID}}/comment/",
+													"host": [
+														"{{HOST}}"
+													],
+													"path": [
+														"api",
+														"{{API_VERSION}}",
+														"post",
+														"{{POST_ID}}",
+														"comment",
+														""
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "/",
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{USER1_ACCESS_TOKEN}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{HOST}}/api/{{API_VERSION}}/post/{{POST_ID}}/comment/",
+													"host": [
+														"{{HOST}}"
+													],
+													"path": [
+														"api",
+														"{{API_VERSION}}",
+														"post",
+														"{{POST_ID}}",
+														"comment",
+														""
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "/<comment_id>",
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{USER1_ACCESS_TOKEN}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "PATCH",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"content\": \"tok osjnd\"\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{HOST}}/api/{{API_VERSION}}/post/{{POST_ID}}/comment/{{COMMENT_ID}}/",
+													"host": [
+														"{{HOST}}"
+													],
+													"path": [
+														"api",
+														"{{API_VERSION}}",
+														"post",
+														"{{POST_ID}}",
+														"comment",
+														"{{COMMENT_ID}}",
+														""
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "/<comment_id>",
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{USER1_ACCESS_TOKEN}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "{{HOST}}/api/{{API_VERSION}}/post/{{POST_ID}}/comment/{{COMMENT_ID}}/",
+													"host": [
+														"{{HOST}}"
+													],
+													"path": [
+														"api",
+														"{{API_VERSION}}",
+														"post",
+														"{{POST_ID}}",
+														"comment",
+														"{{COMMENT_ID}}",
+														""
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "/<comment_id> /report/",
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{USER2_ACCESS_TOKEN}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"content\": \"tok osjnd\"\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{HOST}}/api/{{API_VERSION}}/post/{{POST_ID}}/comment/{{COMMENT_ID}}/report/",
+													"host": [
+														"{{HOST}}"
+													],
+													"path": [
+														"api",
+														"{{API_VERSION}}",
+														"post",
+														"{{POST_ID}}",
+														"comment",
+														"{{COMMENT_ID}}",
+														"report",
+														""
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "like",
+									"item": [
+										{
+											"name": "/",
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{USER1_ACCESS_TOKEN}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "POST",
+												"header": [],
+												"url": {
+													"raw": "{{HOST}}/api/{{API_VERSION}}/post/{{POST_ID}}/like/",
+													"host": [
+														"{{HOST}}"
+													],
+													"path": [
+														"api",
+														"{{API_VERSION}}",
+														"post",
+														"{{POST_ID}}",
+														"like",
+														""
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "/",
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{USER1_ACCESS_TOKEN}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "{{HOST}}/api/{{API_VERSION}}/post/{{POST_ID}}/like/",
+													"host": [
+														"{{HOST}}"
+													],
+													"path": [
+														"api",
+														"{{API_VERSION}}",
+														"post",
+														"{{POST_ID}}",
+														"like",
+														""
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "/",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{USER1_ACCESS_TOKEN}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "image",
+													"type": "file",
+													"src": "/D:/wallpaper/might guy.png"
+												},
+												{
+													"key": "content",
+													"value": "hel this is the post",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{HOST}}/api/{{API_VERSION}}/post/",
+											"host": [
+												"{{HOST}}"
+											],
+											"path": [
+												"api",
+												"{{API_VERSION}}",
+												"post",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "/",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{USER1_ACCESS_TOKEN}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "formdata",
+											"formdata": []
+										},
+										"url": {
+											"raw": "{{HOST}}/api/{{API_VERSION}}/post/",
+											"host": [
+												"{{HOST}}"
+											],
+											"path": [
+												"api",
+												"{{API_VERSION}}",
+												"post",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "/ <post_id>/",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{USER1_ACCESS_TOKEN}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "formdata",
+											"formdata": []
+										},
+										"url": {
+											"raw": "{{HOST}}/api/{{API_VERSION}}/post/{{POST_ID}}/",
+											"host": [
+												"{{HOST}}"
+											],
+											"path": [
+												"api",
+												"{{API_VERSION}}",
+												"post",
+												"{{POST_ID}}",
+												""
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	]
+}
